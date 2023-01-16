@@ -20,8 +20,9 @@ async def start_command(msg: types.Message):
 async def send_logs() -> None:
     user = int(ADMIN_ID)
     logs = parse_log_files()
-    for log in logs:
-        await bot.send_message(user, log)
+    if len(logs) > 0:
+        for log in logs:
+            await bot.send_message(user, log)
     
 @dp.message_handler(Text)
 async def answer(msg: types.message) -> None:
