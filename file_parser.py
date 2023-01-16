@@ -52,6 +52,8 @@ def _get_rows_to_send(level_rows : list):
                                                             .split('.')[0][:-3]
         if row_time == future_time:
             rows_to_send.append(row)
+            
+    return rows_to_send
 
 
 def parse_log_files() -> list:
