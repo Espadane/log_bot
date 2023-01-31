@@ -41,15 +41,15 @@ def _get_level_rows(log_files : list) -> list:
     
     return new_rows
 
-def _get_rows_to_send(level_rows : list):
+def _get_rows_to_send(level_rows : list) -> list:
     """
     Получаем строки для отправки пользователю
     """
     rows_to_send = []
     for row in level_rows:
-        row_time = row.split(' - ')[0].split(',')[0][:-3]
-        future_time = str(datetime.now() + timedelta(minutes=-CHECK_MINUTES))\
-                                                            .split('.')[0][:-3]
+        row_time = row.split(' - ')[0].split(',')[0]
+        future_time = datetime.now() + timedelta(minutes=-CHECK_MINUTES)
+        future_time = future_time.strftime('%d.%b.%Y %H:%M')
         if row_time == future_time:
             rows_to_send.append(row)
             
@@ -62,3 +62,4 @@ def parse_log_files() -> list:
     rows_to_send = _get_rows_to_send(level_rows)
     
     return rows_to_send
+print(parse_log_files())
