@@ -62,4 +62,3 @@ def parse_log_files() -> list:
     rows_to_send = _get_rows_to_send(level_rows)
     
     return rows_to_send
-print(parse_log_files())
