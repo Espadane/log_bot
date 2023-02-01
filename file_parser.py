@@ -51,7 +51,7 @@ def _get_rows_to_send(level_rows : list) -> list:
         try:
             row_time = re.search(r'\d{2}.\w{3}.\d{4} \d{2}:\d{2}', row).group(0)
         except Exception as error:
-            print(error)
+            continue
         future_time = datetime.now() + timedelta(minutes=-CHECK_MINUTES)
         future_time = future_time.strftime('%d.%b.%Y %H:%M')
         if row_time == future_time:
