@@ -1,4 +1,5 @@
 import os
+import re
 from config import LOG_LEVEL
 from config import CHECK_MINUTES
 from datetime import datetime
@@ -47,7 +48,7 @@ def _get_rows_to_send(level_rows : list) -> list:
     """
     rows_to_send = []
     for row in level_rows:
-        row_time = row.split(' - ')[0].split(',')[0]
+        row_time = re.search(r'\d{2}.\w{3}.\d{4} \d{2}:\d{2}', row).group(0)
         future_time = datetime.now() + timedelta(minutes=-CHECK_MINUTES)
         future_time = future_time.strftime('%d.%b.%Y %H:%M')
         if row_time == future_time:
@@ -62,3 +63,5 @@ def parse_log_files() -> list:
     rows_to_send = _get_rows_to_send(level_rows)
     
     return rows_to_send
+
+print(parse_log_files())
